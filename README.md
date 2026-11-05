@@ -1,37 +1,43 @@
 # KeyForge — agente de programação com pool de chaves
 
-Agente de código com **interface web** (estilo chat/IDE, sem terminal), que gerencia um pool
-de várias chaves de API de **sete provedores** — NVIDIA NIM, Freebuff, OpenAI, Google Gemini,
-DeepSeek, OpenRouter e Anthropic (via proxy local) — com **rotação automática por limite de uso**,
-**rate limiter global compartilhado entre instâncias**, **health check por modelo** e
-**seletor de modelo** por provedor. Distribuído como **app desktop Electron** com instalador
-`.exe` para Windows (electron-builder), com configurações preservadas em
-`%APPDATA%\KeyForge\config.json`.
+![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg) ![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue) ![Node 20+](https://img.shields.io/badge/node-20%2B-green)
 
-![fluxo](docs/fluxo.svg)
+## O que é o KeyForge?
 
-## Screenshots
+O **KeyForge** é um agente de programação local com interface de chat/IDE que reúne **sete provedores de IA** — NVIDIA NIM, Freebuff, OpenAI, Google Gemini, DeepSeek, OpenRouter e Anthropic — em um único lugar. Você conversa, lê e edita arquivos e executa comandos com aprovação, sem precisar alternar entre abas, SDKs ou terminais.
 
-> **Placeholders** — adicione as capturas reais em `docs/screenshots/` e troque a tabela por
-> imagens Markdown (`![Chat](docs/screenshots/chat.png)`), por exemplo.
+O problema que ele resolve é o **limite de uso**. Em vez de parar quando uma chave estoura a cota, o KeyForge mantém um pool por provedor, faz rotação automática, aplica um **rate limiter global** e testa a saúde de cada modelo antes de oferecê-lo. Se uma conta falha, a próxima assume; se um provedor inteiro fica indisponível, o agente continua no fallback.
 
-| Tela | Arquivo sugerido |
-|---|---|
-| Chat com ferramentas e aprovação de shell | `docs/screenshots/chat.png` |
-| Pool de chaves / status dos provedores | `docs/screenshots/keys.png` |
-| Seletor de modelo + health check | `docs/screenshots/models.png` |
-| Configurações (ordem, RPM, concorrência) | `docs/screenshots/settings.png` |
+Diferente de wrappers que apenas repassam uma API key, o KeyForge é um **produto desktop completo**: backend Python sem dependências externas, frontend React com glassmorphism e tour guiado, app Electron e instalador Windows. Suas chaves, conversas e configurações ficam na sua máquina — não em um servidor intermediário.
 
-### Instalação rápida
+## Funcionalidades
 
-1. Baixe o instalador mais recente em **`https://github.com/<seu-usuario>/keyforge/releases/latest`**
-   (substitua `<seu-usuario>` depois de publicar) **ou** compile com `npm install && npm run build`
-   e `npm run dist`.
-2. Execute `KeyForge-Setup-1.1.0.exe` e abra o **KeyForge** pelo atalho.
-3. Cadastre pelo menos uma chave em **Pool de chaves → + adicionar chave**.
-4. Escolha o modelo na barra superior e comece a conversar.
+| Funcionalidade | Status | Descrição |
+|---|:---:|---|
+| **Pool de chaves** | ✅ | Várias chaves por provedor, com rotação automática, cooldown e reativação sem reiniciar o app. |
+| **7 provedores** | ✅ | NVIDIA NIM, Freebuff, OpenAI, Google Gemini, DeepSeek, OpenRouter e Anthropic via proxy local. |
+| **Rate limiter global** | ✅ | Janela deslizante de 60 s por chave, compartilhada entre instâncias e verificada antes de cada chamada. |
+| **Health check** | ✅ | Testa cada modelo com uma chamada real e esconde os que a conta não pode usar. |
+| **Glassmorphism** | ✅ | UI translúcida com temas claro/escuro, Liquid Glass refrativo e fallback para navegadores sem suporte. |
+| **Tour guiado** | ✅ | Onboarding de 5 passos apresentando chat, chaves, modelos e configurações. |
+| **App Electron** | ✅ | Aplicativo desktop Windows com backend Python embutido e instalador NSIS. |
 
----
+## Como rodar
+
+### Clone o repositório e rode `npm install && npm run build`
+
+Pré-requisitos: **Python 3.10+** e **Node.js 20+**.
+
+```powershell
+git clone https://github.com/heitormirandasjp-collab/keyforge.git
+cd keyforge
+npm install && npm run build
+npm start
+```
+
+O build cria a `.venv`, empacota o backend com PyInstaller e prepara o frontend; o `npm start` abre o KeyForge no Electron. Na primeira execução, cadastre pelo menos uma chave em **Pool de chaves → + adicionar chave** e escolha o modelo na barra superior.
+
+Para gerar o instalador NSIS, rode `npm run dist` (detalhes na seção 9).
 
 ---
 
@@ -58,6 +64,10 @@ Stack: **Python 3.10+** (backend, apenas biblioteca padrão) + **React 19/Vite**
 ---
 
 ## 2. Estrutura do repositório
+
+![Arquitetura](docs/fluxo.svg)
+
+Visão geral do fluxo: a UI React (navegador ou Electron) conversa com o backend Python local, que aplica rate limit e health check antes de rotear cada chamada para o provedor escolhido.
 
 ```
 backend/
@@ -652,6 +662,28 @@ endpoint, o resumo, a gravação no `config.json`, o roteador e o fallback do ag
   proxy. Ele apenas consome um endpoint compatível com OpenAI que você aponta no painel.
 - O Vandamme Proxy (Anthropic) também é de terceiros e roda separadamente em `127.0.0.1:8082`.
   Sem ele, o provedor Anthropic fica indisponível; os demais continuam funcionando.
+
+---
+
+## Como contribuir
+
+Sugestões, relatos de bug e pull requests são bem-vindos.
+
+1. **Abra uma issue** descrevendo o problema, o comportamento esperado e como reproduzir. Se for uma feature, explique o caso de uso.
+2. **Faça um fork** do repositório e crie uma branch curta para a sua mudança (`feat/...` ou `fix/...`).
+3. **Envie um pull request** com escopo pequeno, explicando o que mudou e como testou.
+
+Para mudanças de comportamento, rode `npm test` e os testes do backend antes de abrir o PR. Não inclua chaves, tokens ou arquivos de configuração locais no commit.
+
+## Agradecimentos
+
+O KeyForge é construído sobre projetos e ideias da comunidade:
+
+- **[Freebuff2API](https://github.com/Quorinex/Freebuff2API)** — proxy compatível com OpenAI usado para integrar o Freebuff.
+- **[Waypoint Tours](https://github.com/jupaorba/tour-skill)** — biblioteca do tour guiado de primeiros passos (`@waypoint-tours/react` e `@waypoint-tours/runtime`).
+- **React 19, Vite 6 e Electron 33** — interface, build e app desktop.
+- **electron-builder e PyInstaller** — instalador NSIS e empacotamento do backend Python.
+- **Vandamme Proxy** — proxy local que traduz a API da Anthropic para o formato OpenAI.
 
 ---
 
