@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+*.egg-info/
+
+# Node / frontend
+node_modules/
+frontend/dist/
+frontend/build-out.txt
+vite.config.js.timestamp-*
+
+# Build do executável e instalador
+dist/
+build/
+dist_installer/
+dist-electron/
+release/
+*.blockmap
+*.spec.bak
+
+# Logs de verificação locais
+backend/.pytest-out.txt
+
+# Segredos e configuração local (NUNCA commitar)
+config.json
+*.config.json
+*.env
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+secrets/
+
+# Estado compartilhado, logs e portas locais
+rate_state.json
+rate_state.lock
+last-port.txt
+security.log
+*.log
+
+# Metadados do Freebuff / agentes
+.freebuff/
+
+# Editores / SO
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini

@@ -1,0 +1,629 @@
+/* ==========================================================================
+   KeyForge — design system (tema, vidro e layout flutuante)
+   Carregado depois de styles.css para refinar a interface sem perder as regras
+   estruturais existentes.
+   ========================================================================== */
+
+:root {
+  color-scheme: dark;
+
+  --radius: 14px;
+  --radius-sm: 10px;
+  --mono: "Cascadia Code", "JetBrains Mono", Consolas, ui-monospace, monospace;
+  --sans: Inter, "Segoe UI", system-ui, -apple-system, sans-serif;
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  --bg: #070a0f;
+  --bg-soft: #0c1118;
+  --panel: #121821;
+  --panel-2: #0f151d;
+  --panel-3: #1a2230;
+  --field: #0b1017;
+  --field-focus: #0d141d;
+  --surface-1: #121923;
+  --surface-2: #151d28;
+  --surface-3: #0d131b;
+  --hover: #1a2431;
+  --button-hover: #1e2938;
+  --line: #253041;
+  --line-strong: #344156;
+  --line-stronger: #46566f;
+  --text: #edf2f8;
+  --text-2: #c7d2e1;
+  --muted: #94a3b8;
+  --accent: #6ea2ff;
+  --accent-strong: #3b82f6;
+  --accent-hover: #5b95ff;
+  --accent-soft: rgba(110, 162, 255, 0.14);
+  --accent-text: #a8c7ff;
+  --accent-text-hover: #c7dcff;
+  --accent-border: #34517d;
+  --on-accent: #ffffff;
+  --ok: #45d483;
+  --ok-text: #9af0bd;
+  --ok-border: #285640;
+  --warn: #f0b44c;
+  --warn-text: #f7d391;
+  --warn-border: #5e4a25;
+  --warn-soft: #1f1a10;
+  --warn-border-strong: #6b552a;
+  --danger: #ff7185;
+  --danger-text: #ffb3bf;
+  --danger-muted: #dba7b1;
+  --danger-border: #582e39;
+  --danger-border-strong: #71394a;
+  --danger-soft: #241318;
+  --danger-soft-2: #201218;
+  --danger-ghost: #86636b;
+  --scrollbar: #2c3849;
+  --scrollbar-hover: #41506a;
+  --spinner-track: #344053;
+
+  --chat-bg: #0b1119;
+  --chat-bg-soft: #0e1520;
+
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-highlight: rgba(255, 255, 255, 0.62);
+  --glass-edge: rgba(255, 255, 255, 0.18);
+  --glass-inner-highlight: rgba(255, 255, 255, 0.25);
+  --glass-inner-shadow: rgba(255, 255, 255, 0.06);
+  --glass-outer-shadow: rgba(0, 0, 0, 0.35);
+  --glass-shadow:
+    inset 0 1px 0 var(--glass-inner-highlight),
+    inset 0 -1px 0 var(--glass-inner-shadow),
+    0 8px 32px var(--glass-outer-shadow);
+  --solid-glass: #121821;
+
+  --shadow-card: 0 18px 48px rgba(0, 0, 0, 0.32);
+  --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.22);
+  --shadow-float: 0 18px 44px rgba(0, 0, 0, 0.35);
+  --shadow-button: 0 10px 26px rgba(0, 0, 0, 0.34);
+  --shadow-modal: 0 28px 80px rgba(0, 0, 0, 0.64);
+  --shadow-drawer-color: rgba(0, 0, 0, 0.5);
+  --shadow-modal-color: rgba(0, 0, 0, 0.6);
+  --shadow-soft-color: rgba(0, 0, 0, 0.22);
+  --shadow-deep-color: rgba(0, 0, 0, 0.55);
+  --backdrop: rgba(5, 7, 10, 0.72);
+  --backdrop-soft: rgba(5, 7, 10, 0.55);
+  --bg-glow-1: rgba(76, 141, 255, 0.18);
+  --bg-glow-2: rgba(155, 92, 255, 0.14);
+
+  --wp-font: var(--sans);
+  --wp-surface: var(--panel);
+  --wp-surface-2: var(--panel-2);
+  --wp-text: var(--text);
+  --wp-text-muted: var(--muted);
+  --wp-border: var(--line-strong);
+  --wp-accent: var(--accent-strong);
+  --wp-accent-text: var(--on-accent);
+  --wp-shadow: var(--shadow-float);
+  --wp-overlay-color: rgba(2, 6, 12, 0.74);
+  --wp-radius: 14px;
+  --wp-z: 2147483000;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+
+  --bg: #eef3fa;
+  --bg-soft: #f7f9fd;
+  --panel: #ffffff;
+  --panel-2: #f4f7fb;
+  --panel-3: #e9eff8;
+  --field: #f7f9fd;
+  --field-focus: #ffffff;
+  --surface-1: #ffffff;
+  --surface-2: #f2f6fb;
+  --surface-3: #f8fafc;
+  --hover: #eaf1fb;
+  --button-hover: #e5edf8;
+  --line: #d8e1ee;
+  --line-strong: #c4d0e2;
+  --line-stronger: #aebdd2;
+  --text: #111827;
+  --text-2: #344054;
+  --muted: #667085;
+  --accent: #2563eb;
+  --accent-strong: #1d4ed8;
+  --accent-hover: #3b82f6;
+  --accent-soft: rgba(37, 99, 235, 0.1);
+  --accent-text: #1d4ed8;
+  --accent-text-hover: #1e40af;
+  --accent-border: #bfd3f7;
+  --on-accent: #ffffff;
+  --ok: #15803d;
+  --ok-text: #166534;
+  --ok-border: #bbf7d0;
+  --warn: #b45309;
+  --warn-text: #92400e;
+  --warn-border: #fde68a;
+  --warn-soft: #fffbeb;
+  --warn-border-strong: #fcd34d;
+  --danger: #dc2626;
+  --danger-text: #b91c1c;
+  --danger-muted: #9f1239;
+  --danger-border: #fecaca;
+  --danger-border-strong: #fca5a5;
+  --danger-soft: #fef2f2;
+  --danger-soft-2: #fff1f2;
+  --danger-ghost: #b08d95;
+  --scrollbar: #cbd5e1;
+  --scrollbar-hover: #94a3b8;
+  --spinner-track: #cbd5e1;
+
+  --chat-bg: #ffffff;
+  --chat-bg-soft: #f8fafc;
+
+  --glass-bg: rgba(0, 0, 0, 0.05);
+  --glass-border: rgba(15, 23, 42, 0.12);
+  --glass-highlight: rgba(255, 255, 255, 0.96);
+  --glass-edge: rgba(255, 255, 255, 0.86);
+  --glass-inner-highlight: rgba(255, 255, 255, 0.95);
+  --glass-inner-shadow: rgba(255, 255, 255, 0.55);
+  --glass-outer-shadow: rgba(15, 23, 42, 0.16);
+  --glass-shadow:
+    inset 0 1px 0 var(--glass-inner-highlight),
+    inset 0 -1px 0 var(--glass-inner-shadow),
+    0 8px 32px var(--glass-outer-shadow);
+  --solid-glass: #ffffff;
+
+  --shadow-card: 0 18px 48px rgba(15, 23, 42, 0.08);
+  --shadow-soft: 0 8px 24px rgba(15, 23, 42, 0.08);
+  --shadow-float: 0 18px 44px rgba(15, 23, 42, 0.16);
+  --shadow-button: 0 10px 26px rgba(37, 99, 235, 0.2);
+  --shadow-modal: 0 28px 80px rgba(15, 23, 42, 0.18);
+  --shadow-drawer-color: rgba(15, 23, 42, 0.16);
+  --shadow-modal-color: rgba(15, 23, 42, 0.18);
+  --shadow-soft-color: rgba(15, 23, 42, 0.08);
+  --shadow-deep-color: rgba(15, 23, 42, 0.14);
+  --backdrop: rgba(15, 23, 42, 0.3);
+  --backdrop-soft: rgba(15, 23, 42, 0.22);
+  --bg-glow-1: rgba(37, 99, 235, 0.14);
+  --bg-glow-2: rgba(147, 51, 234, 0.1);
+
+  --wp-overlay-color: rgba(15, 23, 42, 0.38);
+}
+
+html {
+  background: var(--bg);
+}
+
+body {
+  background:
+    radial-gradient(1100px 720px at 6% -14%, var(--bg-glow-1), transparent 62%),
+    radial-gradient(900px 700px at 104% -4%, var(--bg-glow-2), transparent 58%),
+    var(--bg);
+  background-attachment: fixed;
+  transition:
+    background-color 0.28s var(--ease),
+    color 0.28s var(--ease);
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--text);
+}
+
+* {
+  scrollbar-color: var(--scrollbar) transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--scrollbar);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-hover);
+}
+
+.liquid-glass-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------- vidro fosco + luz */
+.glass {
+  position: relative;
+  isolation: isolate;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  backdrop-filter: blur(16px) saturate(160%);
+  box-shadow: var(--glass-shadow);
+}
+
+.glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    var(--glass-highlight) 0%,
+    transparent 32%,
+    transparent 68%,
+    var(--glass-edge) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+/* Refração real via SVG. O seletor só existe se o feature check do JS passou;
+   sem suporte, permanece o blur() de .glass como fallback. */
+@supports (backdrop-filter: url("#keyforge-liquid-refraction")) {
+  html[data-liquid-glass="on"] .glass {
+    backdrop-filter: url("#keyforge-liquid-refraction") blur(2px) saturate(170%) brightness(1.03);
+  }
+
+  html[data-liquid-glass="on"] .glass::before {
+    filter: url("#keyforge-liquid-chromatic");
+  }
+}
+
+/* ------------------------------------------------------------- estrutura */
+.app {
+  grid-template-rows: 72px minmax(0, 1fr) 30px;
+}
+
+.topbar {
+  height: 60px;
+  margin: 12px 12px 0;
+  padding: 0 16px;
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  background: var(--glass-bg);
+}
+
+.workspace {
+  padding: 0 12px;
+  gap: 12px;
+}
+
+.sidebar,
+.chatlist {
+  height: auto;
+  margin: 12px 0;
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  background: var(--glass-bg);
+}
+
+.sidebar {
+  padding: 18px 16px;
+}
+
+.chatlist {
+  padding: 18px 14px;
+}
+
+.chat-area {
+  height: auto;
+  margin: 12px 0;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--chat-bg);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.composer {
+  background: var(--chat-bg-soft);
+}
+
+.statusbar {
+  padding: 0 14px;
+  border-top: 1px solid var(--line);
+  background: transparent;
+}
+
+/* O corpo do chat é sólido de propósito: vidro atrapalha textos longos. */
+.chat-panel,
+.chat-scroll {
+  background: transparent;
+}
+
+/* --------------------------------------------------------------- botões */
+button.primary {
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  color: var(--on-accent);
+}
+
+button.primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--accent-hover), var(--accent));
+  box-shadow: var(--shadow-button);
+  transform: translateY(-2px);
+}
+
+.sync-models,
+.settings-button,
+.new-chat,
+.theme-toggle,
+.fab {
+  transition:
+    transform 0.16s var(--ease),
+    box-shadow 0.16s var(--ease),
+    background-color 0.16s var(--ease),
+    border-color 0.16s var(--ease),
+    color 0.16s var(--ease);
+}
+
+.sync-models:hover:not(:disabled),
+.settings-button:hover:not(:disabled),
+.new-chat:hover:not(:disabled),
+.theme-toggle:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-button);
+}
+
+.theme-toggle {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface-2);
+  color: var(--muted);
+}
+
+.theme-toggle:hover:not(:disabled) {
+  border-color: var(--accent-border);
+  background: var(--accent-soft);
+  color: var(--accent-text);
+}
+
+/* --------------------------------------------------------- botões flutuantes */
+.fab-stack {
+  position: fixed;
+  right: 28px;
+  bottom: 52px;
+  z-index: 35;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.fab {
+  height: 42px;
+  min-width: 42px;
+  padding: 0 12px;
+  border-radius: 999px;
+  color: var(--text);
+  box-shadow:
+    inset 0 1px 0 var(--glass-inner-highlight),
+    0 8px 32px var(--glass-outer-shadow);
+}
+
+.fab:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 var(--glass-inner-highlight),
+    0 12px 36px var(--glass-outer-shadow);
+}
+
+.fab .fab-label {
+  max-width: 0;
+  margin-left: 0;
+  overflow: hidden;
+  opacity: 0;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 600;
+  transition:
+    max-width 0.2s var(--ease),
+    opacity 0.2s var(--ease),
+    margin-left 0.2s var(--ease);
+}
+
+.fab:hover .fab-label,
+.fab:focus-visible .fab-label {
+  max-width: 120px;
+  margin-left: 2px;
+  opacity: 1;
+}
+
+.fab-accent {
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  color: var(--on-accent);
+}
+
+.fab-accent:hover {
+  background: linear-gradient(135deg, var(--accent-hover), var(--accent));
+}
+
+/* ------------------------------------------------------------ tour guiado */
+.wp-tooltip {
+  box-sizing: border-box;
+  width: max-content;
+  min-width: min(280px, calc(100vw - 32px));
+  /* O runtime 0.1.1 grava max-width inline com a largura da viewport. */
+  max-width: min(340px, calc(100vw - 24px)) !important;
+  max-height: calc(100vh - 24px);
+  overflow: auto;
+  font-family: var(--sans);
+  font-size: 13px;
+  border-radius: 14px;
+}
+
+.wp-tooltip-title {
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.wp-tooltip-body {
+  font-size: 12.5px;
+  line-height: 1.55;
+}
+
+.wp-btn--primary {
+  background: var(--accent-strong);
+  color: var(--on-accent);
+}
+
+.wp-btn--primary:hover {
+  background: var(--accent-hover);
+}
+
+.wp-btn--ghost:hover {
+  border-color: var(--line-strong);
+  background: var(--hover);
+}
+
+.wp-tooltip-close:hover {
+  color: var(--text);
+}
+
+/* --------------------------------------------------- CTA do tour nas configs */
+.modal-body section.tour-settings-cta {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.tour-settings-cta h3 {
+  margin-bottom: 4px;
+}
+
+.tour-settings-cta .ghost-button {
+  flex: 0 0 auto;
+}
+
+/* -------------------------------------------------------------- mobile */
+@media (max-width: 1024px) {
+  .chatlist {
+    top: 72px;
+    right: 12px;
+    bottom: 42px;
+    width: min(320px, calc(100vw - 24px));
+    height: auto;
+    margin: 0;
+    border-radius: 16px;
+  }
+
+  .drawer-backdrop-chats {
+    top: 72px;
+    bottom: 30px;
+  }
+}
+
+@media (max-width: 900px) {
+  .app {
+    grid-template-rows: 64px minmax(0, 1fr) 28px;
+  }
+
+  .topbar {
+    height: 56px;
+    margin: 8px 8px 0;
+    padding: 0 12px;
+  }
+
+  .workspace {
+    padding: 0 8px;
+    gap: 8px;
+  }
+
+  .sidebar {
+    top: 64px;
+    bottom: 28px;
+    left: 8px;
+    width: min(320px, calc(100vw - 16px));
+    height: auto;
+    margin: 0;
+    border-radius: 16px;
+  }
+
+  .chatlist {
+    top: 64px;
+    right: 8px;
+    bottom: 28px;
+  }
+
+  .drawer-backdrop-chats,
+  .drawer-backdrop-sidebar {
+    top: 64px;
+    bottom: 28px;
+  }
+
+  .chat-area {
+    margin: 8px 0;
+    border-radius: 14px;
+  }
+
+  .fab-stack {
+    right: 16px;
+    bottom: 42px;
+  }
+}
+
+@media (max-width: 560px) {
+  .modal-body section.tour-settings-cta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .fab-stack {
+    right: 12px;
+    bottom: 38px;
+  }
+}
+
+/* ------------------------------------ acessibilidade / fallback de vidro */
+@media (prefers-reduced-transparency: reduce) {
+  .glass,
+  html[data-liquid-glass="on"] .glass {
+    background: var(--solid-glass);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .glass::before,
+  html[data-liquid-glass="on"] .glass::before {
+    display: none;
+    filter: none;
+  }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass {
+    background: var(--solid-glass);
+  }
+
+  .glass::before {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sync-models,
+  .settings-button,
+  .new-chat,
+  .theme-toggle,
+  .fab {
+    transition: none;
+  }
+
+  .sync-models:hover:not(:disabled),
+  .settings-button:hover:not(:disabled),
+  .new-chat:hover:not(:disabled),
+  .theme-toggle:hover:not(:disabled),
+  .fab:hover {
+    transform: none;
+  }
+}

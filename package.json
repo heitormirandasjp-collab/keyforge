@@ -1,0 +1,60 @@
+{
+  "name": "keyforge",
+  "version": "1.1.0",
+  "private": true,
+  "description": "Agente de programação local com pool de chaves e múltiplos provedores de API.",
+  "author": "KeyForge contributors",
+  "license": "MIT",
+  "main": "electron/main.js",
+  "scripts": {
+    "start": "electron .",
+    "postinstall": "npm --prefix frontend install --no-audit --no-fund",
+    "build": "npm run build:frontend && npm run build:backend",
+    "build:frontend": "npm --prefix frontend run build",
+    "build:backend": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build.ps1 -SkipFrontend",
+    "dist": "npm run build && electron-builder --win nsis",
+    "test": "npm --prefix frontend test"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.keyforge.app",
+    "productName": "KeyForge",
+    "artifactName": "KeyForge-Setup-${version}.${ext}",
+    "directories": {
+      "output": "dist-electron"
+    },
+    "files": [
+      "electron/**/*",
+      "package.json",
+      "LICENSE"
+    ],
+    "extraResources": [
+      {
+        "from": "dist/keyforge-backend.exe",
+        "to": "backend/keyforge-backend.exe"
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "KeyForge"
+    }
+  }
+}

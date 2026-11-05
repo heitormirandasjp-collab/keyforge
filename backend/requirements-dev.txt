@@ -1,0 +1,4 @@
+# O backend em si usa apenas a biblioteca padrão do Python (roda com Python 3.10+).
+# Estas dependências são só para desenvolvimento e empacotamento.
+pytest>=8.0
+pyinstaller>=6.10

@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 420" width="900" height="420" role="img" aria-label="Arquitetura do KeyForge">
+  <defs>
+    <style>
+      .box { fill: #121a26; stroke: #2a3a4f; stroke-width: 1.5; rx: 12; }
+      .box-accent { fill: #0c211f; stroke: #1f5f56; }
+      .t { fill: #e7eefb; font-family: Segoe UI, sans-serif; font-size: 14px; font-weight: 600; }
+      .s { fill: #8b9db6; font-family: Segoe UI, sans-serif; font-size: 11px; }
+      .m { fill: #5eead4; font-family: Consolas, monospace; font-size: 11px; }
+      .l { stroke: #35506e; stroke-width: 1.5; fill: none; marker-end: url(#a); }
+      .bg { fill: #0a0e15; }
+    </style>
+    <marker id="a" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+      <path d="M0,0 L9,4.5 L0,9 z" fill="#35506e" />
+    </marker>
+  </defs>
+
+  <rect class="bg" width="900" height="420" />
+
+  <rect class="box" x="24" y="150" width="180" height="110" rx="12" />
+  <text class="t" x="44" y="182">UI web (React)</text>
+  <text class="s" x="44" y="204">chat · seleção de modelo</text>
+  <text class="s" x="44" y="222">painel de chaves/status</text>
+  <text class="m" x="44" y="244">127.0.0.1:8787</text>
+
+  <rect class="box" x="250" y="120" width="220" height="170" rx="12" />
+  <text class="t" x="270" y="150">Backend local</text>
+  <text class="s" x="270" y="174">SSE + loop ReAct</text>
+  <text class="s" x="270" y="194">tools: read/write/list/shell</text>
+  <text class="s" x="270" y="214">aprovação de comando</text>
+  <text class="s" x="270" y="234">config: %APPDATA%\KeyForge</text>
+  <text class="m" x="270" y="262">somente stdlib</text>
+
+  <rect class="box box-accent" x="516" y="110" width="170" height="190" rx="12" />
+  <text class="t" x="536" y="140">KeyPool</text>
+  <text class="s" x="536" y="164">ordem de provedores</text>
+  <text class="s" x="536" y="184">rotação por chave</text>
+  <text class="s" x="536" y="204">cooldown 429</text>
+  <text class="s" x="536" y="224">sliding window 60s</text>
+  <text class="s" x="536" y="244">máx. 40 RPM/chave</text>
+  <text class="m" x="536" y="272">ativa · cooldown · esgotada</text>
+
+  <rect class="box" x="732" y="60" width="144" height="86" rx="12" />
+  <text class="t" x="752" y="88">NVIDIA NIM</text>
+  <text class="s" x="752" y="108">integrate.api</text>
+  <text class="s" x="752" y="124">nvidia.com/v1</text>
+
+  <rect class="box" x="732" y="262" width="144" height="86" rx="12" />
+  <text class="t" x="752" y="290">Freebuff</text>
+  <text class="s" x="752" y="310">proxy OpenAI</text>
+  <text class="s" x="752" y="326">Freebuff2API</text>
+
+  <path class="l" d="M204 200 L246 200" />
+  <path class="l" d="M470 200 L512 200" />
+  <path class="l" d="M686 150 L728 112" />
+  <path class="l" d="M686 258 L728 296" />
+
+  <text class="s" x="24" y="392">Cada chave tem contador próprio; a chamada só é enviada se houver cota na janela atual.</text>
+</svg>
